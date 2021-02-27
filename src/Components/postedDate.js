@@ -1,15 +1,16 @@
-const { DateTime } = require("luxon");
+import { PostedDateContainer } from "../Styles/storyStyles";
+import { DateTime } from "luxon";
+
+// const { DateTime } = require("luxon");
 
 const PostedDate = ({ unixTime }) => {
-  const { minute, hour, day, month, year } = DateTime.fromSeconds(unixTime).c;
-
   return (
-    <div>
+    <PostedDateContainer>
       <span>
         Posted:
-        {hour}:{minute} {day}/{month}/{year}
+        {DateTime.fromSeconds(unixTime).toFormat("HH:mm yyyy/MM/dd")}
       </span>
-    </div>
+    </PostedDateContainer>
   );
 };
 

@@ -6,18 +6,21 @@ import {
   PostDetailsWrapper,
   StoryDetailsWrapper,
   DomainName,
+  StoryWrapper,
 } from "../Styles/storyStyles";
 import { domainExtractor } from "../Utils/domainExtractor";
 
-export const NewsStory = ({ storyId }) => {
+export const NewsStory = ({ storyId }, storyNumber) => {
   const [story, setStory] = useState([]);
 
   useEffect(() => {
     getStory(storyId).then((data) => data && data.url && setStory(data));
   }, []);
 
+  //   console.log(storyNumber);
+
   return story && story.url ? (
-    <div>
+    <StoryWrapper>
       <StoryDetailsWrapper>
         <StoryLinks href={story.url}>
           <div>{story.title}</div>
@@ -30,6 +33,6 @@ export const NewsStory = ({ storyId }) => {
         <PostedDate unixTime={story.time} />
         By: {story.by}
       </PostDetailsWrapper>
-    </div>
+    </StoryWrapper>
   ) : null;
 };

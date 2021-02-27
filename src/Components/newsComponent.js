@@ -5,6 +5,7 @@ import { NewsStory } from "./newsStory";
 const NewsComponent = () => {
   const [allStoryId, setAllStoryId] = useState([]);
   const [loadedStoryIds, setLoadedStoryIds] = useState([]);
+  const [storyNumber, setStoryNumber] = useState(0);
 
   useEffect(() => {
     const fetchStoryIds = getStoryIds()
@@ -22,7 +23,13 @@ const NewsComponent = () => {
   return (
     <div>
       {loadedStoryIds.map((storyId) => {
-        return <NewsStory key={storyId} storyId={storyId} />;
+        return (
+          <NewsStory
+            key={storyId}
+            storyId={storyId}
+            storyNumber={storyNumber}
+          />
+        );
       })}
       <button onClick={() => getMoreStories()}>More Results</button>
     </div>
