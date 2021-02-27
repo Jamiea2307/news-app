@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
 import { getStory } from "../Routes/hackerNewsAPI";
+import PostedDate from "../Components/postedDate";
+import {
+  StoryLinks,
+  PostDetailsWrapper,
+  StoryDetailsWrapper,
+  DomainName,
+} from "../Styles/storyStyles";
+import { domainExtractor } from "../Utils/domainExtractor";
 
 export const NewsStory = ({ storyId }) => {
   const [story, setStory] = useState([]);
@@ -8,11 +16,20 @@ export const NewsStory = ({ storyId }) => {
     getStory(storyId).then((data) => data && data.url && setStory(data));
   }, []);
 
-  //   console.log(story);
-
   return story && story.url ? (
-    <a href={story.url}>
-      <p>{story.title}</p>
-    </a>
+    <div>
+      <StoryDetailsWrapper>
+        <StoryLinks href={story.url}>
+          <div>{story.title}</div>
+        </StoryLinks>
+        <DomainName href={story.url}>
+          {story.url && domainExtractor(story.url)}
+        </DomainName>
+      </StoryDetailsWrapper>
+      <PostDetailsWrapper>
+        <PostedDate unixTime={story.time} />
+        By: {story.by}
+      </PostDetailsWrapper>
+    </div>
   ) : null;
 };

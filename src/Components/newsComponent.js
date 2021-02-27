@@ -11,14 +11,13 @@ const NewsComponent = () => {
       .then((data) => data)
       .catch((err) => err);
     fetchStoryIds.then((data) => data && setAllStoryId(data));
-    fetchStoryIds.then((data) => data && setLoadedStoryIds(data.splice(0, 25)));
+    fetchStoryIds.then((data) => data && setLoadedStoryIds(data.splice(0, 26)));
   }, []);
 
   const getMoreStories = () => {
-    const loadedStories = [...loadedStoryIds, ...allStoryId.splice(0, 25)];
+    const loadedStories = [...loadedStoryIds, ...allStoryId.splice(0, 26)];
     setLoadedStoryIds(loadedStories);
   };
-  console.log(allStoryId);
 
   return (
     <div>
