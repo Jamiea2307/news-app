@@ -1,18 +1,25 @@
-import { getStoryIds } from "../Routes/hackerNewsAPI";
+import { getAllDetails } from "../Routes/hackerNewsAPI";
+import { getStorys } from "../Routes/redditApi";
 import { useState, useEffect } from "react";
 import { NewsStory } from "./newsStory";
+// import { getStory as getRedditStory } from "../Routes/redditApi";
 
 const NewsComponent = () => {
   const [allStoryId, setAllStoryId] = useState([]);
   const [loadedStoryIds, setLoadedStoryIds] = useState([]);
-  const [storyNumber, setStoryNumber] = useState(0);
+
+  // useEffect(() => {
+  //   getAllDetails().then((data) => setAllStoryId(data));
+  // }, []);
+
+  // useEffect(() => {
+  //   setLoadedStoryIds(allStoryId.splice(0, 26));
+  // }, [allStoryId]);
 
   useEffect(() => {
-    const fetchStoryIds = getStoryIds()
-      .then((data) => data)
-      .catch((err) => err);
-    fetchStoryIds.then((data) => data && setAllStoryId(data));
-    fetchStoryIds.then((data) => data && setLoadedStoryIds(data.splice(0, 26)));
+    getStorys()
+      .then((data) => setLoadedStoryIds(data))
+      .catch((err) => console.log(err));
   }, []);
 
   const getMoreStories = () => {
@@ -22,14 +29,8 @@ const NewsComponent = () => {
 
   return (
     <div>
-      {loadedStoryIds.map((storyId) => {
-        return (
-          <NewsStory
-            key={storyId}
-            storyId={storyId}
-            storyNumber={storyNumber}
-          />
-        );
+      {loadedStoryIds.map((story) => {
+        return <NewsStory key={Math.random()} storyDetails={story} />;
       })}
       <button onClick={() => getMoreStories()}>More Results</button>
     </div>

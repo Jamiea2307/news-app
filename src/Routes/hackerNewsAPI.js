@@ -1,5 +1,5 @@
 import axios from "axios";
-import { selectFields } from "../Utils/selectFields";
+import { selectFields } from "../Utils/selectFieldsHackerNews";
 
 export const baseURL = "https://hacker-news.firebaseio.com/v0/";
 export const newStories = `${baseURL}newstories.json`;
@@ -7,27 +7,34 @@ export const topStories = `${baseURL}topstories.json`;
 export const bestStories = `${baseURL}beststories.json`;
 export const storyURL = `${baseURL}item/`;
 
-export const getStory = async (storyId) => {
-  const result = await axios
-    .get(`${storyURL + storyId}.json`)
-    .then(({ data }) => data && selectFields(data))
-    .catch((err) => console.log(err));
-
-  return result;
+const getStory = async (storyId) => {
+  const { data } = await axios.get(`${storyURL + storyId}.json`);
+  const story = data && selectFields(data);
+  return story;
 };
 
-// export const getStoryIds = async () => {
-//   const result = await axios
-//     .get(newsStories)
-//     .then(({ data }) => data)
-//     .catch((err) => console.log(err));
-//   return result;
-// };
-
-export const getStoryIds = async () => {
-  const result = await axios
-    .get(newStories)
-    .then(({ data }) => data)
-    .catch((err) => console.log(err));
-  return result;
+const getStoryIds = async () => {
+  const { data: storyIds } = await axios.get(newStories);
+  return storyIds;
 };
+
+export const getAllDetails = async () => {
+  const storyIds = await getStoryIds();
+  // *** Use `Promise.all`
+  return Promise.all(storyIds.map(getStory));
+  /* Or if you prefer
+  const stories = await Promise.all(storyIds.map(getStory));
+  return stories;
+  */
+};
+
+// *** Example call outside of an `async` function
+// getAllDetails()
+//   .then((stories) => {
+//     // *** ...use the array of stories...
+//     console.log(stories);
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//     // *** ...handle/report error...
+//   });
