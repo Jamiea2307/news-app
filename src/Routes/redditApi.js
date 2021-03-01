@@ -2,9 +2,10 @@ import axios from "axios";
 import { selectFields } from "../Utils/selectFieldsReddit";
 
 //https://www.reddit.com/r/wallpapers.json?&limit=25&raw_json=1
+//use after value to get next page of results
 
 export const baseURL = "https://www.reddit.com/r/";
-export const subreddit = `${baseURL}soccer.json?&limit=25`;
+export const subreddit = `${baseURL}soccer.json`;
 
 // export const getStorys = async () => {
 //   const result = await axios
@@ -21,6 +22,7 @@ export const subreddit = `${baseURL}soccer.json?&limit=25`;
 export const getStorys = async () => {
   const { data } = await axios.get(subreddit);
 
+  console.log(data);
   var processedStories = data.data.children.map((post) =>
     selectFields(post.data)
   );
