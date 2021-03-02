@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 // import { getStory } from "../Routes/hackerNewsAPI";
 import PostedDate from "../Components/postedDate";
 import {

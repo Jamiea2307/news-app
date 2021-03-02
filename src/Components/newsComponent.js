@@ -1,44 +1,43 @@
+import { useState, useEffect } from "react";
 import { getAllDetails } from "../Routes/hackerNewsAPI";
 import { getStorys } from "../Routes/redditApi";
-import { useState, useEffect } from "react";
 import { NewsStory } from "./newsStory";
-// import { getStory as getRedditStory } from "../Routes/redditApi";
+import { Spinner } from "./spinner";
+import { useContext } from "react";
+import { AppContext } from "../App";
 
-const NewsComponent = ({ selectedSite }) => {
-  const [allStoryId, setAllStoryId] = useState([]);
+const NewsComponent = () => {
   const [loadedStoryIds, setLoadedStoryIds] = useState([]);
+  const [loadingSpinner, setLoadingSpinner] = useState(false);
+
+  const { state } = useContext(AppContext);
 
   useEffect(() => {
-    if (selectedSite === "hackernews") {
-      getAllDetails().then((data) => setLoadedStoryIds(data));
-    } else if (selectedSite === "reddit") {
-      getStorys().then((data) => setLoadedStoryIds(data));
-    } else {
-      setLoadedStoryIds([]);
+    setLoadedStoryIds([]);
+    if (state.siteSelected === "hackernews") {
+      setLoadingSpinner(true);
+      getAllDetails()
+        .then((data) => setLoadedStoryIds(data))
+        .finally(() => setLoadingSpinner(false));
+    } else if (state.siteSelected === "reddit") {
+      setLoadingSpinner(true);
+      getStorys()
+        .then((data) => setLoadedStoryIds(data))
+        .finally(() => setLoadingSpinner(false));
     }
-  }, [selectedSite]);
+  }, [state.siteSelected]);
 
-  // useEffect(() => {
-  //   setLoadedStoryIds(allStoryId.splice(0, 26));
-  // }, [allStoryId]);
-
-  // useEffect(() => {
-  //   getStorys()
-  //     .then((data) => setLoadedStoryIds(data))
-  //     .catch((err) => console.log(err));
-  // }, []);
-
-  const getMoreStories = () => {
-    const loadedStories = [...loadedStoryIds, ...allStoryId.splice(0, 26)];
-    setLoadedStoryIds(loadedStories);
-  };
+  useEffect(() => {
+    setLoadingSpinner(true);
+  }, []);
 
   return (
     <div>
       {loadedStoryIds.map((story) => {
         return <NewsStory key={story.id} storyDetails={story} />;
       })}
-      <button onClick={() => getMoreStories()}>More Results</button>
+      {loadingSpinner ? <Spinner /> : null}
+      {/* <button onClick={() => getMoreStories()}>More Results</button> */}
     </div>
   );
 };

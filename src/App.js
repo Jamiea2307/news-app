@@ -1,45 +1,33 @@
-import { useState } from "react";
-// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { createContext, useReducer } from "react";
 import NewsComponent from "./Components/newsComponent";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyles } from "./Styles/themes";
-import { CheckboxInput } from "./Styles/appStyles";
 import { useTheme } from "./Hooks/useTheme";
 import NavBar from "./Components/navBar";
+import { CheckboxInput } from "./Styles/appStyles";
+import { siteNameReducer } from "./Reducers/siteNameReducer";
+
+export const AppContext = createContext();
+
+const initialState = {
+  siteSelected: "hackernews",
+};
 
 const App = () => {
-  const [currentSite, setCurrentSite] = useState("");
+  const [state, dispatch] = useReducer(siteNameReducer(), initialState);
   const [theme, toggleTheme] = useTheme();
   const themeMode = theme === "Light" ? lightTheme : darkTheme;
-
-  const dropDownChange = (e) => {
-    setCurrentSite(e.target.value);
-  };
 
   return (
     <ThemeProvider theme={themeMode}>
       <GlobalStyles />
-      <NavBar />
-      <select
-        name="site"
-        value={currentSite}
-        onChange={(e) => dropDownChange(e)}
-      >
-        <option selected></option>
-        <option value="hackernews">Hacker News</option>
-        <option value="reddit">Reddit</option>
-      </select>
-      {/* <CheckboxInput onClick={toggleTheme}>{theme} Theme</CheckboxInput> */}
-      <NewsComponent selectedSite={currentSite} />
+      <AppContext.Provider value={{ state, dispatch }}>
+        <NavBar />
+        {/* <CheckboxInput onClick={toggleTheme}>{theme} Theme</CheckboxInput> */}
+        <NewsComponent selectedSite={{ state }} />
+      </AppContext.Provider>
     </ThemeProvider>
   );
-  // (
-  //   <Router>
-  //     <Switch>
-  //       <Route path="/" />
-  //     </Switch>
-  //   </Router>
-  // );
 };
 
 export default App;

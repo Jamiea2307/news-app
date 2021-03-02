@@ -6,7 +6,7 @@ const newStories = `${baseURL}newstories.json`;
 const topStories = `${baseURL}topstories.json`;
 const bestStories = `${baseURL}beststories.json`;
 const storyURL = `${baseURL}item/`;
-const params = `?print=pretty&orderBy="$key"&limitToFirst=26`;
+const params = `?print=pretty&orderBy="$key"&limitToFirst=25`;
 
 // `https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty&orderBy="$key"&startAt="0"&endAt="10"`
 // const getOrderedStoryids = async () => {
@@ -25,7 +25,7 @@ const getStory = async (storyId) => {
 };
 
 const getStoryIds = async () => {
-  const { data: storyIds } = await axios.get(`${newStories + params}`);
+  const { data: storyIds } = await axios.get(`${bestStories + params}`);
   return storyIds;
 };
 
@@ -38,7 +38,6 @@ export const getAllDetails = async () => {
   */
 };
 
-// *** Example call outside of an `async` function
 // getAllDetails()
 //   .then((stories) => {
 //     // *** ...use the array of stories...
