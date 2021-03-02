@@ -11,9 +11,10 @@ export const ListStyle = styled.li`
   display: flex;
   height: 100%;
 
-  div {
-    margin-right: 25px;
-    width: 7rem;
+  button {
+    height: 80px;
+    width: 80px;
+    border: none;
   }
 
   div:hover {

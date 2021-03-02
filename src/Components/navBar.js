@@ -3,13 +3,13 @@ import { NavbarContainer, ListStyle } from "../Styles/navStyles";
 import { useContext } from "react";
 import { AppContext } from "../App";
 import { ReactComponent as Hackernews } from "../Styles/Images/Y_Combinator_logo.svg";
-import { ReactComponent as Reddit } from "../Styles/Images/Reddit_logo_full_1SVG.svg";
+import { ReactComponent as Reddit } from "../Styles/Images/Reddit_Mark_OnWhite.svg";
 
 const NavBar = () => {
   const { dispatch } = useContext(AppContext);
 
   const changeInputValue = (newValue) => {
-    dispatch({ type: "UPDATE_INPUT", data: newValue.target.value });
+    dispatch({ type: "UPDATE_INPUT", data: newValue });
   };
 
   return (
@@ -21,8 +21,12 @@ const NavBar = () => {
         </select>
       </div> */}
       <ListStyle>
-        <Hackernews />
-        <Reddit />
+        <button onClick={() => changeInputValue("hackernews")}>
+          <Hackernews />
+        </button>
+        <button onClick={() => changeInputValue("reddit")}>
+          <Reddit />
+        </button>
       </ListStyle>
     </NavbarContainer>
   );
