@@ -1,16 +1,19 @@
 import { createContext, useReducer } from "react";
-import NewsComponent from "./Components/newsComponent";
+import { useTheme } from "./Hooks/useTheme";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import PostsContainer from "./Components/postsContainer.js";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyles } from "./Styles/themes";
-import { useTheme } from "./Hooks/useTheme";
 import NavBar from "./Components/navBar";
 import { CheckboxInput } from "./Styles/appStyles";
 import { siteNameReducer } from "./Reducers/siteNameReducer";
+import { sites } from "./Data/sites";
+import { CommentContainer } from "./Components/commentContainer";
 
 export const AppContext = createContext();
 
 const initialState = {
-  siteSelected: "hackernews",
+  siteSelected: sites.HackerNews,
 };
 
 const App = () => {
@@ -23,8 +26,15 @@ const App = () => {
       <GlobalStyles />
       <AppContext.Provider value={{ state, dispatch }}>
         <NavBar />
+        <Router>
+          <Switch>
+            <Route path="/" exact>
+              <PostsContainer selectedSite={{ state }} />
+            </Route>
+            <Route path="/comments/:id" component={CommentContainer} />
+          </Switch>
+        </Router>
         {/* <CheckboxInput onClick={toggleTheme}>{theme} Theme</CheckboxInput> */}
-        <NewsComponent selectedSite={{ state }} />
       </AppContext.Provider>
     </ThemeProvider>
   );

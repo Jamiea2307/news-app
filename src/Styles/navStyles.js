@@ -17,7 +17,7 @@ export const ListStyle = styled.li`
     border: none;
   }
 
-  div:hover {
+  button:hover {
     cursor: pointer;
   }
 `;

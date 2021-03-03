@@ -1,15 +1,20 @@
 import { useState, useEffect } from "react";
 
+const themeType = {
+  Light: "Light",
+  Dark: "Dark",
+};
+
 export const useTheme = () => {
-  const [theme, setTheme] = useState("Light");
+  const [theme, setTheme] = useState(themeType.Light);
 
   const toggleTheme = () => {
-    if (theme === "Light") {
-      setTheme("Dark");
-      window.localStorage.setItem("theme", "Dark");
+    if (theme === themeType.Light) {
+      setTheme(themeType.Dark);
+      window.localStorage.setItem("theme", themeType.Dark);
     } else {
-      setTheme("Light");
-      window.localStorage.setItem("theme", "Light");
+      setTheme(themeType.Light);
+      window.localStorage.setItem("theme", themeType.Light);
     }
   };
 
@@ -18,7 +23,7 @@ export const useTheme = () => {
 
     localTheme
       ? setTheme(localTheme)
-      : window.localStorage.setItem("theme", "Light");
+      : window.localStorage.setItem("theme", themeType.Light);
   }, []);
 
   return [theme, toggleTheme];

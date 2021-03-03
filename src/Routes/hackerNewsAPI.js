@@ -1,5 +1,6 @@
 import axios from "axios";
 import { selectFields } from "../Utils/selectFieldsHackerNews";
+import { getComments } from "./redditApi";
 
 const baseURL = "https://hacker-news.firebaseio.com/v0/";
 const newStories = `${baseURL}newstories.json`;
@@ -16,8 +17,6 @@ const params = `?print=pretty&orderBy="$key"&limitToFirst=25`;
 //   // console.log(storyIds);
 // };
 
-// getOrderedStoryids();
-
 const getStory = async (storyId) => {
   const { data } = await axios.get(`${storyURL + storyId}.json`);
   const story = data && selectFields(data);
@@ -29,21 +28,30 @@ const getStoryIds = async () => {
   return storyIds;
 };
 
-export const getAllDetails = async () => {
+export const getAllStoryDetails = async () => {
   const storyIds = await getStoryIds();
   return Promise.all(storyIds.map(getStory));
-  /* Or
-  const stories = await Promise.all(storyIds.map(getStory));
-  return stories;
-  */
 };
+
+const getCommentIds = async (commentIds) => {
+  const {
+    data: { kids },
+  } = await axios.get(`${storyURL + commentIds}.json`);
+  console.log(kids);
+  return kids;
+};
+
+const getComment = async (commentId) => {
+  const { data } = await axios.get(`${storyURL + commentId}.json`);
+  console.log(data);
+  return data;
+};
+getComment(26329080);
 
 // getAllDetails()
 //   .then((stories) => {
-//     // *** ...use the array of stories...
 //     console.log(stories);
 //   })
 //   .catch((error) => {
 //     console.log(error);
-//     // *** ...handle/report error...
 //   });

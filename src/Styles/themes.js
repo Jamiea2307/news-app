@@ -8,6 +8,7 @@ export const lightTheme = {
   themeButtonFont: "#fff",
   linkColor: "#0000EE",
   linkVisited: "#551A8B",
+  spinnerColor: "#152028",
 };
 
 export const darkTheme = {
@@ -18,6 +19,7 @@ export const darkTheme = {
   themeButtonFont: "#000",
   linkColor: "#fff",
   linkVisited: "#A6A6A6",
+  spinnerColor: "#fff",
 };
 
 export const GlobalStyles = createGlobalStyle`

@@ -1,5 +1,4 @@
-// import { getStory } from "../Routes/hackerNewsAPI";
-import PostedDate from "../Components/postedDate";
+import PostedDate from "./postedDate";
 import {
   StoryLinks,
   PostDetailsWrapper,
@@ -8,8 +7,9 @@ import {
   StoryWrapper,
 } from "../Styles/storyStyles";
 import { domainExtractor } from "../Utils/domainExtractor";
+import { Comments } from "../Components/comments";
 
-export const NewsStory = ({ storyDetails }) => {
+export const PostDetails = ({ storyDetails }) => {
   return storyDetails && storyDetails.url ? (
     <StoryWrapper>
       <StoryDetailsWrapper>
@@ -24,6 +24,7 @@ export const NewsStory = ({ storyDetails }) => {
         <PostedDate unixTime={storyDetails.time} />
         By: {storyDetails.by}
       </PostDetailsWrapper>
+      <Comments id={storyDetails.id} commentList={storyDetails.kids}></Comments>
     </StoryWrapper>
   ) : null;
 };
