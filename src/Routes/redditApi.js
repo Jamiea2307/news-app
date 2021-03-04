@@ -1,5 +1,5 @@
 import axios from "axios";
-import { selectFields } from "../Utils/selectFieldsReddit";
+import { selectFields, selectCommentFields } from "../Utils/selectFieldsReddit";
 
 //https://www.reddit.com/r/wallpapers.json?&limit=25&raw_json=1
 //use after value to get next page of results
@@ -9,7 +9,6 @@ export const subreddit = `${baseURL}all.json`;
 
 export const getStorys = async () => {
   const { data } = await axios.get(subreddit);
-
   var processedStories = data.data.children.map((post) =>
     selectFields(post.data)
   );
@@ -17,12 +16,12 @@ export const getStorys = async () => {
   return processedStories;
 };
 
-export const getComments = async () => {
-  const { data } = await axios.get(
-    "https://www.reddit.com/r/HumansBeingBros/comments/lwwd1c/such_a_wholesome_story.json"
+export const getComments = async (extention) => {
+  const { data } = await axios.get(`https://www.reddit.com/${extention}.json`);
+  var processedcomments = data[1].data.children.map((comments) =>
+    selectCommentFields(comments.data)
   );
-
-  return data[1].data.children;
+  return processedcomments;
 };
 
 //video fromat taken from media reddit_video fallback

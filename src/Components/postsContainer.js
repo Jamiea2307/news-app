@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-// import { getAllDetails } from "../Routes/hackerNewsAPI";
-// import { getStorys } from "../Routes/redditApi";
 import { PostDetails } from "./postDetails";
 import { Spinner } from "./loadingSpinner";
 import { useContext } from "react";

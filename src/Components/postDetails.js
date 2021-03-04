@@ -10,6 +10,7 @@ import { domainExtractor } from "../Utils/domainExtractor";
 import { Comments } from "../Components/comments";
 
 export const PostDetails = ({ storyDetails }) => {
+  console.log(storyDetails);
   return storyDetails && storyDetails.url ? (
     <StoryWrapper>
       <StoryDetailsWrapper>
@@ -24,7 +25,11 @@ export const PostDetails = ({ storyDetails }) => {
         <PostedDate unixTime={storyDetails.time} />
         By: {storyDetails.by}
       </PostDetailsWrapper>
-      <Comments id={storyDetails.id} commentList={storyDetails.kids}></Comments>
+      <Comments
+        id={storyDetails.id}
+        commentList={storyDetails.kids}
+        commentNumber={storyDetails.num_comments}
+      ></Comments>
     </StoryWrapper>
   ) : null;
 };

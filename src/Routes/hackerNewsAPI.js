@@ -1,5 +1,9 @@
 import axios from "axios";
-import { selectFields } from "../Utils/selectFieldsHackerNews";
+import {
+  selectFields,
+  selectCommentFields,
+} from "../Utils/selectFieldsHackerNews";
+
 import { getComments } from "./redditApi";
 
 const baseURL = "https://hacker-news.firebaseio.com/v0/";
@@ -24,7 +28,7 @@ const getStory = async (storyId) => {
 };
 
 const getStoryIds = async () => {
-  const { data: storyIds } = await axios.get(`${bestStories + params}`);
+  const { data: storyIds } = await axios.get(`${topStories + params}`);
   return storyIds;
 };
 
@@ -33,20 +37,30 @@ export const getAllStoryDetails = async () => {
   return Promise.all(storyIds.map(getStory));
 };
 
-const getCommentIds = async (commentIds) => {
-  const {
-    data: { kids },
-  } = await axios.get(`${storyURL + commentIds}.json`);
-  console.log(kids);
-  return kids;
+// const getCommentIds = async (commentIds) => {
+//   const {
+//     data: { kids },
+//   } = await axios.get(`${storyURL + commentIds}.json`);
+//   console.log(`${storyURL + commentIds}.json`);
+//   return kids;
+// };
+
+const mapChildComments = (comment) => {
+  return Promise.all(comment.map(getComment));
 };
 
 const getComment = async (commentId) => {
   const { data } = await axios.get(`${storyURL + commentId}.json`);
-  console.log(data);
-  return data;
+  const comment = data && selectCommentFields(data);
+  if (comment && comment.kids && comment.kids.length > 0) {
+    mapChildComments(comment.kids).then((data) => (comment.kids = data));
+  }
+  return comment;
 };
-getComment(26329080);
+
+export const getAllCommentDetails = async (id) => {
+  return Promise.all(id.map(getComment));
+};
 
 // getAllDetails()
 //   .then((stories) => {

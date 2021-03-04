@@ -6,3 +6,11 @@ export const selectFields = ({ id, by, url, time, title, kids } = {}) => ({
   title,
   kids,
 });
+
+export const selectCommentFields = ({ by, id, kids, text, time } = {}) => ({
+  by,
+  id,
+  kids,
+  text,
+  time,
+});

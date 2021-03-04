@@ -8,7 +8,7 @@ import NavBar from "./Components/navBar";
 import { CheckboxInput } from "./Styles/appStyles";
 import { siteNameReducer } from "./Reducers/siteNameReducer";
 import { sites } from "./Data/sites";
-import { CommentContainer } from "./Components/commentContainer";
+import { CommentsContainer } from "./Components/commentsContainer";
 
 export const AppContext = createContext();
 
@@ -31,7 +31,7 @@ const App = () => {
             <Route path="/" exact>
               <PostsContainer selectedSite={{ state }} />
             </Route>
-            <Route path="/comments/:id" component={CommentContainer} />
+            <Route path="/comments/:id" component={CommentsContainer} />
           </Switch>
         </Router>
         {/* <CheckboxInput onClick={toggleTheme}>{theme} Theme</CheckboxInput> */}

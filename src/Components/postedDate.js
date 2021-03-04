@@ -1,8 +1,6 @@
 import { PostedDateContainer } from "../Styles/storyStyles";
 import { DateTime } from "luxon";
 
-// const { DateTime } = require("luxon");
-
 const PostedDate = ({ unixTime }) => {
   return (
     <PostedDateContainer>
