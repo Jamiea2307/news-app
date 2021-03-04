@@ -2,7 +2,7 @@ import { getAllCommentDetails } from "../Routes/hackerNewsAPI";
 import { getComments } from "../Routes/redditApi";
 import { useState, useEffect } from "react";
 import DOMPurify from "dompurify";
-import { CommentContainer } from "../Styles/commentStyles";
+import { CommentContainer, CommentText } from "../Styles/commentStyles";
 import PostedDate from "./postedDate";
 
 export const CommentsContainer = (comments) => {
@@ -18,6 +18,10 @@ export const CommentsContainer = (comments) => {
     if (id) getComments(id).then((data) => setComment(data));
   }, [id]);
 
+  const addPostedTime = (time) => {
+    if (time) return <PostedDate unixTime={time} />;
+  };
+
   return (
     <div>
       {comment &&
@@ -25,10 +29,10 @@ export const CommentsContainer = (comments) => {
           return (
             <CommentContainer key={Math.random()}>
               <div>
-                {id.by}
-                <PostedDate unixTime={id.time} />
+                <span className="authorName">{id.by}</span>
+                <span className="postTime">{addPostedTime(id.time)}</span>
               </div>
-              <div
+              <CommentText
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(id.text),
                 }}

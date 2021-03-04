@@ -1,7 +1,9 @@
 import { PostedDateContainer } from "../Styles/storyStyles";
 import { DateTime } from "luxon";
+//TODO move styles to be set in parent
 
 const PostedDate = ({ unixTime }) => {
+  console.log(unixTime);
   return (
     <PostedDateContainer>
       <span>

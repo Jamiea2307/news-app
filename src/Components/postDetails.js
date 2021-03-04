@@ -8,6 +8,7 @@ import {
 } from "../Styles/storyStyles";
 import { domainExtractor } from "../Utils/domainExtractor";
 import { Comments } from "../Components/comments";
+import DOMPurify from "dompurify";
 
 export const PostDetails = ({ storyDetails }) => {
   console.log(storyDetails);
@@ -15,7 +16,11 @@ export const PostDetails = ({ storyDetails }) => {
     <StoryWrapper>
       <StoryDetailsWrapper>
         <StoryLinks href={storyDetails.url}>
-          <div>{storyDetails.title}</div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(storyDetails.title),
+            }}
+          />
         </StoryLinks>
         <DomainName href={storyDetails.url}>
           {storyDetails.url && domainExtractor(storyDetails.url)}
