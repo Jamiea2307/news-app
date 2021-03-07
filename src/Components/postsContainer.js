@@ -24,7 +24,7 @@ const PostsContainer = () => {
         ) : null;
       })}
       {loadingSpinner ? <Spinner /> : null}
-      {/* <button onClick={() => getMoreStories()}>More Results</button> */}
+      {!loadingSpinner ? <button>More Results</button> : null}
     </div>
   );
 };

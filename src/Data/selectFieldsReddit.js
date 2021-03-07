@@ -6,6 +6,7 @@ export const selectFields = ({
   title,
   permalink,
   num_comments,
+  crosspost_parent_list,
 } = {}) => ({
   id,
   by: author,
@@ -13,7 +14,8 @@ export const selectFields = ({
   time: created,
   title,
   permalink,
-  num_comments,
+  descendants: num_comments,
+  crosspost_parent_list,
 });
 
 export const selectCommentFields = ({

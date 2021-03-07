@@ -1,45 +1,57 @@
-import { getAllCommentDetails } from "../Routes/hackerNewsAPI";
-import { getComments } from "../Routes/redditApi";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AppContext } from "../App";
 import DOMPurify from "dompurify";
-import { CommentContainer, CommentText } from "../Styles/commentStyles";
 import PostedDate from "./postedDate";
+import { commentSiteSelector } from "../Utils/commentSiteSelector";
+import { getAllCommentDetails } from "../Routes/hackerNewsAPI";
+import { getElementError } from "@testing-library/react";
+import { CommentContainer, CommentText } from "../Styles/commentStyles";
 
-export const CommentsContainer = (comments) => {
-  const [comment, setComment] = useState([]);
-  const { commentIds, id } = comments.location.state;
+// import Comment from "../Components/comment";
+
+export const CommentsContainer = (postId) => {
+  const [details, setDetails] = useState([]);
+  const { id } = postId.match.params;
+
+  const { state } = useContext(AppContext);
 
   useEffect(() => {
-    if (commentIds)
-      getAllCommentDetails(commentIds).then((data) => setComment(data));
-  }, [commentIds]);
+    getAllCommentDetails(id).then((data) => setDetails(data));
+    console.log(details);
+  }, []);
 
-  useEffect(() => {
-    if (id) getComments(id).then((data) => setComment(data));
-  }, [id]);
+  // useEffect(() => {
+  //   if (id) getComments(id).then((data) => setComment(data));
+  // }, [id]);
 
   const addPostedTime = (time) => {
     if (time) return <PostedDate unixTime={time} />;
   };
 
+  const Responses = ({ responses }) => {
+    return responses ? (
+      <div>
+        {responses.map((details) => (
+          <CommentContainer key={details.id}>
+            <div>
+              <span className="authorName">{details.by}</span>
+              <span className="postTime">{addPostedTime(details.time)}</span>
+            </div>
+            <CommentText
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(details.text),
+              }}
+            ></CommentText>
+            <Responses responses={details.kids} />
+          </CommentContainer>
+        ))}
+      </div>
+    ) : null;
+  };
+
   return (
     <div>
-      {comment &&
-        comment.map((id) => {
-          return (
-            <CommentContainer key={Math.random()}>
-              <div>
-                <span className="authorName">{id.by}</span>
-                <span className="postTime">{addPostedTime(id.time)}</span>
-              </div>
-              <CommentText
-                dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(id.text),
-                }}
-              />
-            </CommentContainer>
-          );
-        })}
+      <Responses responses={details} />
     </div>
   );
 };

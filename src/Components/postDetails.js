@@ -6,12 +6,11 @@ import {
   DomainName,
   StoryWrapper,
 } from "../Styles/storyStyles";
-import { domainExtractor } from "../Utils/domainExtractor";
-import { Comments } from "../Components/comments";
+import { urlCheck } from "../Utils/domainExtractor";
+import { Comments } from "./commentsLink";
 import DOMPurify from "dompurify";
 
 export const PostDetails = ({ storyDetails }) => {
-  console.log(storyDetails);
   return storyDetails && storyDetails.url ? (
     <StoryWrapper>
       <StoryDetailsWrapper>
@@ -23,7 +22,7 @@ export const PostDetails = ({ storyDetails }) => {
           />
         </StoryLinks>
         <DomainName href={storyDetails.url}>
-          {storyDetails.url && domainExtractor(storyDetails.url)}
+          {urlCheck(storyDetails)}
         </DomainName>
       </StoryDetailsWrapper>
       <PostDetailsWrapper>
@@ -32,8 +31,7 @@ export const PostDetails = ({ storyDetails }) => {
       </PostDetailsWrapper>
       <Comments
         id={storyDetails.id}
-        commentList={storyDetails.kids}
-        commentNumber={storyDetails.num_comments}
+        commentNumber={storyDetails.descendants}
       ></Comments>
     </StoryWrapper>
   ) : null;

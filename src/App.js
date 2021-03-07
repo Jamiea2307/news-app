@@ -25,10 +25,11 @@ const App = () => {
     <ThemeProvider theme={themeMode}>
       <GlobalStyles />
       <AppContext.Provider value={{ state, dispatch }}>
-        <NavBar />
         <Router>
           <Switch>
             <Route path="/" exact>
+              <NavBar />
+
               <PostsContainer selectedSite={{ state }} />
             </Route>
             <Route path="/comments/:id" component={CommentsContainer} />
