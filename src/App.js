@@ -31,9 +31,8 @@ const App = () => {
       <AppContext.Provider value={{ state, dispatch }}>
         <Router>
           <Switch>
-            <Route path="/" exact>
+            <Route path={["/", "/news-app"]} exact>
               <NavBar />
-
               <PostsContainer selectedSite={{ state }} />
             </Route>
             <Route path="/comments/:id" component={CommentsContainer} />
