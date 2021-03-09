@@ -33,12 +33,12 @@ const App = () => {
           <Switch>
             <Route path={["/", "/news-app"]} exact>
               <NavBar />
+              <CheckboxInput onClick={toggleTheme}>{theme} Theme</CheckboxInput>
               <PostsContainer selectedSite={{ state }} />
             </Route>
             <Route path="/comments/:id" component={CommentsContainer} />
           </Switch>
         </Router>
-        <CheckboxInput onClick={toggleTheme}>{theme} Theme</CheckboxInput>
       </AppContext.Provider>
     </ThemeProvider>
   );
