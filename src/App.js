@@ -38,7 +38,7 @@ const App = () => {
             <Route path="/comments/:id" component={CommentsContainer} />
           </Switch>
         </Router>
-        {/* <CheckboxInput onClick={toggleTheme}>{theme} Theme</CheckboxInput> */}
+        <CheckboxInput onClick={toggleTheme}>{theme} Theme</CheckboxInput>
       </AppContext.Provider>
     </ThemeProvider>
   );
