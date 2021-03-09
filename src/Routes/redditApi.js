@@ -1,5 +1,9 @@
 import axios from "axios";
-import { selectFields, selectCommentFields } from "../Data/selectFieldsReddit";
+import {
+  selectFields,
+  selectCommentFields,
+  selectChildCommentFields,
+} from "../Data/selectFieldsReddit";
 
 //https://www.reddit.com/r/wallpapers.json?&limit=25&raw_json=1
 //use after value to get next page of results
@@ -19,10 +23,10 @@ export const getStorys = async () => {
 
 export const getComments = async (extention) => {
   const { data } = await axios.get(`${baseURLNoR + extention}.json`);
-  const processedcomments = data[1].data.children.map((comments) =>
-    selectCommentFields(comments.data)
-  );
-  return processedcomments;
+
+  // console.log(data);
+
+  return data[1].data.children;
 };
 
 //video fromat taken from media reddit_video fallback

@@ -15,9 +15,15 @@ export const ListStyle = styled.li`
     height: 80px;
     width: 80px;
     border: none;
+    background: none;
+    &:hover {
+      cursor: pointer;
+      background: #3d566e;
+      border-bottom: solid white;
+    }
   }
-
-  button:hover {
-    cursor: pointer;
+  .selected {
+    background: #3d566e;
+    border-bottom: solid white;
   }
 `;

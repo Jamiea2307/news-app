@@ -1,4 +1,3 @@
-import "../Styles/spinner.css";
 import { SpinnerContainer } from "../Styles/spinner";
 
 export const Spinner = () => {

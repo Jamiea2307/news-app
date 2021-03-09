@@ -12,9 +12,13 @@ import { CommentsContainer } from "./Components/commentsContainer";
 
 export const AppContext = createContext();
 
+const currentSite = window.localStorage.selectedsite;
+
 const initialState = {
-  siteSelected: sites.HackerNews,
+  siteSelected: currentSite ? currentSite : sites.HackerNews,
 };
+
+console.log(window.localStorage);
 
 const App = () => {
   const [state, dispatch] = useReducer(siteNameReducer(), initialState);

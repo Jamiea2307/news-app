@@ -2,8 +2,10 @@ import styled from "styled-components";
 
 export const CommentContainer = styled.div`
   padding: 1.5rem 0.5rem;
-  border-top: 1px solid #2e3234;
-  border-bottom: 1px solid #2e3234;
+  /* border-top: 1px solid #2e3234; */
+  /* border-bottom: 1px solid #2e3234; */
+  border-left: 1px solid #bbb3;
+  /* border-right: 1px solid white; */
   color: ${(props) => props.theme.fontColor};
 
   .authorName {
@@ -17,6 +19,10 @@ export const CommentContainer = styled.div`
     line-height: 16px;
     padding-left: 4px;
   }
+`;
+
+export const Comments = styled.div`
+  padding: 1rem;
 `;
 
 export const CommentText = styled.div`

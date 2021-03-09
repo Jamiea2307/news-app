@@ -11,7 +11,7 @@ import { Comments } from "./commentsLink";
 import DOMPurify from "dompurify";
 
 export const PostDetails = ({ storyDetails }) => {
-  return storyDetails && storyDetails.url ? (
+  return storyDetails?.url ? (
     <StoryWrapper>
       <StoryDetailsWrapper>
         <StoryLinks href={storyDetails.url}>
