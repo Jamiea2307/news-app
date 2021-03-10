@@ -7,8 +7,9 @@ export const getSiteData = async (siteSelected, pageValue) => {
 
   switch (siteSelected) {
     case sites.HackerNews:
-      await getHackerNewsDetails().then((data) => {
+      await getHackerNewsDetails(pageValue).then((data) => {
         stories.processedStories = data;
+        stories.after = data.length ? data.length : 0;
       });
       break;
     case sites.Reddit:
@@ -20,6 +21,8 @@ export const getSiteData = async (siteSelected, pageValue) => {
     default:
       console.log("no site selected");
   }
+
+  console.log(stories);
 
   return stories;
 };

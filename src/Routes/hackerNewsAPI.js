@@ -9,7 +9,9 @@ const newStories = `${baseURL}newstories.json`;
 const topStories = `${baseURL}topstories.json`;
 const bestStories = `${baseURL}beststories.json`;
 const storyURL = `${baseURL}item/`;
-const params = `?print=pretty&orderBy="$key"&startAt="0"&limitToFirst=25`;
+const params = `?print=pretty&orderBy="$key"&startAt=`;
+
+const limit = `&limitToFirst=25`;
 
 // `https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty&orderBy="$key"&startAt="0"&endAt="10"`
 // const getOrderedStoryids = async () => {
@@ -25,13 +27,18 @@ const getStory = async (storyId) => {
   return story;
 };
 
-const getStoryIds = async () => {
-  const { data: storyIds } = await axios.get(`${topStories + params}`);
+const getStoryIds = async (pageValue) => {
+  if (!pageValue) pageValue = 0;
+
+  const { data: storyIds } = await axios.get(
+    `${topStories + params + '"' + pageValue + '"' + limit}`
+  );
+
   return storyIds;
 };
 
-export const getAllStoryDetails = async () => {
-  const storyIds = await getStoryIds();
+export const getAllStoryDetails = async (pageValue) => {
+  const storyIds = await getStoryIds(pageValue);
   return Promise.all(storyIds.map(getStory));
 };
 

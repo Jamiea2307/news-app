@@ -43,3 +43,20 @@ export const DomainName = styled.a`
 export const PostedDateContainer = styled.a`
   margin-right: 0.5rem;
 `;
+
+export const ButtonContainer = styled.div`
+  button {
+    height: 3rem;
+    background: none;
+    width: 100%;
+    color: ${(props) => props.theme.fontColor};
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    /* &:disabled {
+      display: none;
+    } */
+  }
+`;
