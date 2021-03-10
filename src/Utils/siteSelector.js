@@ -1,30 +1,25 @@
-import { getAllStoryDetails } from "../Routes/hackerNewsAPI";
-import { getStorys } from "../Routes/redditApi";
+import { getAllStoryDetails as getHackerNewsDetails } from "../Routes/hackerNewsAPI";
+import { getStories as getRedditStories } from "../Routes/redditApi";
 import { sites } from "../Data/sites";
 
-export const selectSite = (
-  siteSelected,
-  setLoadingSpinner,
-  setLoadedStoryIds
-) => {
+export const getSiteData = async (siteSelected, pageValue) => {
+  const stories = {};
+
   switch (siteSelected) {
     case sites.HackerNews:
-      getAllStoryDetails()
-        .then((data) => {
-          setLoadingSpinner(true);
-          setLoadedStoryIds(data);
-        })
-        .finally(() => setLoadingSpinner(false));
+      await getHackerNewsDetails().then((data) => {
+        stories.processedStories = data;
+      });
       break;
     case sites.Reddit:
-      getStorys()
-        .then((data) => {
-          setLoadingSpinner(true);
-          setLoadedStoryIds(data);
-        })
-        .finally(() => setLoadingSpinner(false));
+      await getRedditStories(pageValue).then((data) => {
+        stories.after = data.after;
+        stories.processedStories = data.processedStories;
+      });
       break;
     default:
       console.log("no site selected");
   }
+
+  return stories;
 };

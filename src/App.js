@@ -18,8 +18,6 @@ const initialState = {
   siteSelected: currentSite ? currentSite : sites.HackerNews,
 };
 
-console.log(window.localStorage);
-
 const App = () => {
   const [state, dispatch] = useReducer(siteNameReducer(), initialState);
   const [theme, toggleTheme] = useTheme();

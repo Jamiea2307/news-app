@@ -11,23 +11,37 @@ import {
 const baseURLNoR = "https://www.reddit.com/";
 const baseURL = "https://www.reddit.com/r/";
 const subreddit = `${baseURL}all.json`;
+const nextPage = `${subreddit}?after=`;
 
-export const getStorys = async () => {
-  const { data } = await axios.get(subreddit);
-  const processedStories = data.data.children.map((post) =>
-    selectFields(post.data)
-  );
+export const getStories = async (pageValue) => {
+  const {
+    data: { data },
+  } = pageValue
+    ? await axios.get(`${nextPage + pageValue}`)
+    : await axios.get(subreddit);
 
-  return processedStories;
+  const processedStories = data.children.map((post) => selectFields(post.data));
+
+  const storyData = {
+    after: data.after,
+    processedStories: processedStories,
+  };
+
+  return storyData;
 };
+
+// export const getMoreStories = async (pageValue) => {
+//   const dat
+//   const { data } = await axios.get(`${nextPage + pageValue}`);
+// };
 
 export const getComments = async (extention) => {
   const { data } = await axios.get(`${baseURLNoR + extention}.json`);
 
-  // console.log(data);
-
   return data[1].data.children;
 };
+
+//e.g https://old.reddit.com/r/all.json?after=t3_m1o0fj
 
 //video fromat taken from media reddit_video fallback
 //"https://v.redd.it/cer7jxne75k61/DASH_1080.mp4"

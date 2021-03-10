@@ -1,5 +1,5 @@
 import { NavbarContainer, ListStyle } from "../Styles/navStyles";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AppContext } from "../App";
 import { ReactComponent as Hackernews } from "../Styles/Images/Y_Combinator_logo.svg";
 import { ReactComponent as Reddit } from "../Styles/Images/Reddit_Mark_OnWhite.svg";
@@ -8,6 +8,12 @@ import { sites } from "../Data/sites";
 const NavBar = () => {
   const { dispatch } = useContext(AppContext);
   const [activeButton, setactiveButton] = useState("");
+
+  useEffect(() => {
+    window.localStorage.selectedsite
+      ? setactiveButton(window.localStorage.selectedsite)
+      : setactiveButton(sites.HackerNews);
+  }, []);
 
   const changeSiteValue = (currentSite) => {
     setactiveButton(currentSite);
