@@ -34,7 +34,15 @@ const getStoryIds = async (pageValue) => {
     `${topStories + params + '"' + pageValue + '"' + limit}`
   );
 
-  return storyIds;
+  if (!Array.isArray(storyIds)) {
+    const stories = [];
+    for (const story in storyIds) {
+      stories.push(storyIds[story]);
+    }
+    return stories;
+  }
+
+  return storyIds.filter((story) => story !== null);
 };
 
 export const getAllStoryDetails = async (pageValue) => {

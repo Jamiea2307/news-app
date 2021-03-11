@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const NavbarContainer = styled.div`
   height: 5rem;
   width: 100%;
-  background-color: #1d1f1e;
+  background-color: ${(props) => props.theme.navBar};
 `;
 
 export const ListStyle = styled.li`
@@ -18,12 +18,12 @@ export const ListStyle = styled.li`
     background: none;
     &:hover {
       cursor: pointer;
-      background: #3d566e;
+      background: ${(props) => props.theme.navBarSiteSelected};
       border-bottom: solid white;
     }
   }
   .selected {
-    background: #3d566e;
+    background: ${(props) => props.theme.navBarSiteSelected};
     border-bottom: solid white;
   }
 `;

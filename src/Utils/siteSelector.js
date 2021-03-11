@@ -9,20 +9,18 @@ export const getSiteData = async (siteSelected, pageValue) => {
     case sites.HackerNews:
       await getHackerNewsDetails(pageValue).then((data) => {
         stories.processedStories = data;
-        stories.after = data.length ? data.length : 0;
+        stories.after = data.length || pageValue;
       });
       break;
     case sites.Reddit:
       await getRedditStories(pageValue).then((data) => {
-        stories.after = data.after;
         stories.processedStories = data.processedStories;
+        stories.after = data.after;
       });
       break;
     default:
       console.log("no site selected");
   }
-
-  console.log(stories);
 
   return stories;
 };

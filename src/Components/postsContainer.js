@@ -5,38 +5,46 @@ import { useContext } from "react";
 import { AppContext } from "../App";
 import { getSiteData } from "../Utils/siteSelector";
 import { ButtonContainer } from "../Styles/storyStyles";
+import { ButtonLoadingSpinner } from "../Components/buttonLoadingSpinner";
 
 const PostsContainer = () => {
   const [loadedStoryIds, setLoadedStoryIds] = useState({});
   const [loadingSpinner, setLoadingSpinner] = useState(false);
-  const [moreResultsButton, setMoreResultsButton] = useState(false);
+  const [moreResultsButton, setMoreResultsButton] = useState(true);
 
   const { state } = useContext(AppContext);
 
   useEffect(() => {
     setLoadingSpinner(true);
+    setMoreResultsButton(false);
     getSiteData(state.siteSelected)
       .then((data) => setLoadedStoryIds(data))
       .finally(() => {
         setLoadingSpinner(false);
-        setMoreResultsButton(false);
+        setMoreResultsButton(true);
       });
   }, [state.siteSelected]);
 
   const getMoreResults = () => {
-    setMoreResultsButton(true);
-    console.log(moreResultsButton);
+    setMoreResultsButton(false);
+
     getSiteData(state.siteSelected, loadedStoryIds.after)
       .then((data) => {
         setLoadedStoryIds({
-          after: data.after,
+          after:
+            typeof data.after === "string"
+              ? data.after
+              : loadedStoryIds.processedStories.length +
+                data.processedStories.length,
           processedStories: [
             ...loadedStoryIds.processedStories,
             ...data.processedStories,
           ],
         });
       })
-      .finally(setMoreResultsButton(false));
+      .finally(() => {
+        setMoreResultsButton(true);
+      });
   };
 
   return (
@@ -49,8 +57,15 @@ const PostsContainer = () => {
       {loadingSpinner ? <Spinner /> : null}
       {!loadingSpinner ? (
         <ButtonContainer>
-          <button disabled={moreResultsButton} onClick={() => getMoreResults()}>
-            More Results
+          <button
+            disabled={!moreResultsButton}
+            onClick={() => getMoreResults()}
+          >
+            {moreResultsButton ? (
+              <div className="resultsText">More Results</div>
+            ) : (
+              <ButtonLoadingSpinner />
+            )}
           </button>
         </ButtonContainer>
       ) : null}

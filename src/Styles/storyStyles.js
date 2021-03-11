@@ -8,6 +8,7 @@ export const StoryWrapper = styled.div`
 
 export const StoryLinks = styled.a`
   color: ${(props) => props.theme.linkColor};
+  text-decoration: none;
 
   &:visited {
     color: ${(props) => props.theme.linkVisited};
@@ -50,13 +51,19 @@ export const ButtonContainer = styled.div`
     background: none;
     width: 100%;
     color: ${(props) => props.theme.fontColor};
+    display: flex;
+    justify-content: center;
 
     &:hover {
       cursor: pointer;
     }
 
+    .resultsText {
+      padding-top: 0.7rem;
+    }
+
     /* &:disabled {
-      display: none;
+      background: red;
     } */
   }
 `;

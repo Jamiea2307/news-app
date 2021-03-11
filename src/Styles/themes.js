@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 export const lightTheme = {
-  body: "#FFF8F0",
+  body: "#F5F3E7",
   fontColor: "#000",
   borderColor: "#000",
   themeButton: "#152028",
@@ -9,6 +9,8 @@ export const lightTheme = {
   linkColor: "#0000EE",
   linkVisited: "#551A8B",
   spinnerColor: "#152028",
+  navBar: "#555555",
+  navBarSiteSelected: "#cdc9c3",
 };
 
 export const darkTheme = {
@@ -20,6 +22,8 @@ export const darkTheme = {
   linkColor: "#fff",
   linkVisited: "#A6A6A6",
   spinnerColor: "#fff",
+  navBar: "#1d1f1e",
+  navBarSiteSelected: "#3d566e",
 };
 
 export const GlobalStyles = createGlobalStyle`
