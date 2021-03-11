@@ -8,3 +8,5 @@ export const CheckboxInput = styled.button`
   background-color: ${(props) => props.theme.themeButton};
   color: ${(props) => props.theme.themeButtonFont};
 `;
+
+export default CheckboxInput;

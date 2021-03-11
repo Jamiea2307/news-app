@@ -5,9 +5,9 @@ import {
   StoryDetailsWrapper,
   DomainName,
   StoryWrapper,
-} from "../Styles/storyStyles";
-import { urlCheck } from "../Utils/domainExtractor";
-import { Comments } from "./commentsLink";
+} from "../../Styles/storyStyles";
+import { urlCheck } from "../../Utils/domainExtractor";
+import { Comments } from "../Comments/commentsLink";
 import DOMPurify from "dompurify";
 
 export const PostDetails = ({ storyDetails }) => {

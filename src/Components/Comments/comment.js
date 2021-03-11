@@ -1,16 +1,12 @@
 import DOMPurify from "dompurify";
-import PostedDate from "./postedDate";
+import PostedDate from "../Posts/postedDate";
 import {
   CommentContainer,
   CommentText,
   Comments,
-} from "../Styles/commentStyles";
+} from "../../Styles/commentStyles";
 
 export const Comment = ({ comment }) => {
-  const addPostedTime = (time) => {
-    if (time) return <PostedDate unixTime={time} />;
-  };
-
   return comment ? (
     <Comments>
       {comment.map((details) => (

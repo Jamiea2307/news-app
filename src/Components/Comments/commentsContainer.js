@@ -1,8 +1,7 @@
 import { useState, useEffect, useContext } from "react";
-import { AppContext } from "../App";
-import { commentSiteSelector } from "../Utils/commentSiteSelector";
-
-import { Comment } from "../Components/comment";
+import { AppContext } from "../../App";
+import { commentSiteSelector } from "../../Utils/commentSiteSelector";
+import { Comment } from "./comment";
 import { RedditComments } from "./redditComments";
 
 export const CommentsContainer = (postId) => {

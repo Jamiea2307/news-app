@@ -2,10 +2,7 @@ import styled from "styled-components";
 
 export const CommentContainer = styled.div`
   padding: 1.5rem 0.5rem;
-  /* border-top: 1px solid #2e3234; */
-  /* border-bottom: 1px solid #2e3234; */
   border-left: 1px solid #bbb3;
-  /* border-right: 1px solid white; */
   color: ${(props) => props.theme.fontColor};
 
   .authorName {
@@ -40,7 +37,7 @@ export const LinkContainer = styled.div`
   a {
     text-decoration: none;
     font-size: small;
-    color: ${(props) => props.theme.linkColor};
+    color: ${(props) => props.theme.links.color};
   }
 
   a:hover {

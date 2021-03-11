@@ -1,4 +1,4 @@
-export const siteNameReducer = () => {
+const siteNameReducer = () => {
   const reducer = (state, action) => {
     switch (action.type) {
       case "UPDATE_SITE":
@@ -12,3 +12,5 @@ export const siteNameReducer = () => {
   };
   return reducer;
 };
+
+export default siteNameReducer;

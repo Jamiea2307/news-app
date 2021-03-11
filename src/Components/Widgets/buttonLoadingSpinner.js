@@ -1,9 +1,9 @@
-import { SpinnerContainer } from "../Styles/spinner";
+import { SpinnerContainer } from "../../Styles/Widgets/buttonSpinner";
 
-export const Spinner = () => {
+export const ButtonLoadingSpinner = () => {
   return (
     <SpinnerContainer>
-      <div className="lds-ellipsis">
+      <div class="lds-ring">
         <div></div>
         <div></div>
         <div></div>

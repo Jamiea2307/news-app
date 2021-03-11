@@ -28,3 +28,5 @@ export const useTheme = () => {
 
   return [theme, toggleTheme];
 };
+
+export default useTheme;

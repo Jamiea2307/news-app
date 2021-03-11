@@ -30,11 +30,6 @@ export const getStories = async (pageValue) => {
   return storyData;
 };
 
-// export const getMoreStories = async (pageValue) => {
-//   const dat
-//   const { data } = await axios.get(`${nextPage + pageValue}`);
-// };
-
 export const getComments = async (extention) => {
   const { data } = await axios.get(`${baseURLNoR + extention}.json`);
 

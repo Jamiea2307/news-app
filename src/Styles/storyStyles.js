@@ -7,11 +7,11 @@ export const StoryWrapper = styled.div`
 `;
 
 export const StoryLinks = styled.a`
-  color: ${(props) => props.theme.linkColor};
+  color: ${(props) => props.theme.links.color};
   text-decoration: none;
 
   &:visited {
-    color: ${(props) => props.theme.linkVisited};
+    color: ${(props) => props.theme.links.visited};
   }
 `;
 
@@ -61,9 +61,5 @@ export const ButtonContainer = styled.div`
     .resultsText {
       padding-top: 0.7rem;
     }
-
-    /* &:disabled {
-      background: red;
-    } */
   }
 `;

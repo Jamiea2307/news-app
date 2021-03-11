@@ -1,4 +1,4 @@
-import { PostedDateContainer } from "../Styles/storyStyles";
+import { PostedDateContainer } from "../../Styles/storyStyles";
 import { DateTime } from "luxon";
 //TODO move styles to be set in parent
 

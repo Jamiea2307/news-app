@@ -1,14 +1,15 @@
 import { createContext, useReducer } from "react";
-import { useTheme } from "./Hooks/useTheme";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import PostsContainer from "./Components/postsContainer.js";
-import { ThemeProvider } from "styled-components";
-import { lightTheme, darkTheme, GlobalStyles } from "./Styles/themes";
-import NavBar from "./Components/navBar";
-import { CheckboxInput } from "./Styles/appStyles";
-import { siteNameReducer } from "./Reducers/siteNameReducer";
+import useTheme from "./Hooks/useTheme";
+import PostsContainer from "./Components/Posts/postsContainer";
+import { lightTheme, darkTheme } from "./Styles/Global/themes";
+import GlobalStyles from "./Styles/Global/globalStyles";
+import NavBar from "./Components/Navigation/navBar";
+import CheckboxInput from "./Styles/Widgets/themeBox";
+import siteNameReducer from "./Reducers/siteNameReducer";
 import { sites } from "./Data/sites";
-import { CommentsContainer } from "./Components/commentsContainer";
+import { CommentsContainer } from "./Components/Comments/commentsContainer";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 
 export const AppContext = createContext();
 

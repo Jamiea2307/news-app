@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { PostDetails } from "./postDetails";
-import { Spinner } from "./loadingSpinner";
+import { Spinner } from "../Widgets/loadingSpinner";
 import { useContext } from "react";
-import { AppContext } from "../App";
-import { getSiteData } from "../Utils/siteSelector";
-import { ButtonContainer } from "../Styles/storyStyles";
-import { ButtonLoadingSpinner } from "../Components/buttonLoadingSpinner";
+import { AppContext } from "../../App";
+import { getSiteData } from "../../Utils/siteSelector";
+import { ButtonContainer } from "../../Styles/storyStyles";
+import { ButtonLoadingSpinner } from "../Widgets/buttonLoadingSpinner";
 
 const PostsContainer = () => {
   const [loadedStoryIds, setLoadedStoryIds] = useState({});

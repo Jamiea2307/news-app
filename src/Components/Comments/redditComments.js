@@ -1,10 +1,10 @@
 import DOMPurify from "dompurify";
-import PostedDate from "./postedDate";
+import PostedDate from "../Posts/postedDate";
 import {
   CommentContainer,
   CommentText,
   Comments,
-} from "../Styles/commentStyles";
+} from "../../Styles/commentStyles";
 
 export const RedditComments = ({ comment }) => {
   // const addPostedTime = (time) => {
