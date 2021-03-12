@@ -5,9 +5,9 @@ import {
 } from "../Data/selectFieldsHackerNews";
 
 const baseURL = "https://hacker-news.firebaseio.com/v0/";
-const newStories = `${baseURL}newstories.json`;
+// const newStories = `${baseURL}newstories.json`;
 const topStories = `${baseURL}topstories.json`;
-const bestStories = `${baseURL}beststories.json`;
+// const bestStories = `${baseURL}beststories.json`;
 const storyURL = `${baseURL}item/`;
 const params = `?print=pretty&orderBy="$key"&startAt=`;
 

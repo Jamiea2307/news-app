@@ -1,9 +1,5 @@
 import axios from "axios";
-import {
-  selectFields,
-  selectCommentFields,
-  selectChildCommentFields,
-} from "../Data/selectFieldsReddit";
+import { selectFields } from "../Data/selectFieldsReddit";
 
 //https://www.reddit.com/r/wallpapers.json?&limit=25&raw_json=1
 //use after value to get next page of results

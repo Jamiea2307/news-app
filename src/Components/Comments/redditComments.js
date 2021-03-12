@@ -7,10 +7,6 @@ import {
 } from "../../Styles/commentStyles";
 
 export const RedditComments = ({ comment }) => {
-  // const addPostedTime = (time) => {
-  //   if (time) return <PostedDate unixTime={time} />;
-  // };
-
   return (
     <Comments>
       {comment
