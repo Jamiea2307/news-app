@@ -1,4 +1,4 @@
-https://jamiea2307.github.io/news-app/
+Proof of concept app which uses both the HackerNews and Reddit API to pull data. Available here: https://jamiea2307.github.io/news-app/
 
 # Getting Started with Create React App
 
